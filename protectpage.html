@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Racket: Protected Page</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- import the webpage's client-side javascript file -->
+  </head>
+  <body>
+    <header>
+      <h1>
+        Racket
+      </h1>
+    </header>
+
+    <main>
+      <p class="bold">Oh hi,</p>
+
+      <p>Submit a New Reimbursement</p>
+
+          <form action="/api/new_reimbursement" method="post">
+            <p><code>POST /api/new_reimbursement</code></p>
+            <input id="name" type="text" name="name" placeholder="Chipotle*">
+            <input id="amount" type="text" name="amount" placeholder="$42.42*">
+            <input id="receipt" type="text" name="receipt" placeholder="https://i.imgur.com/E8AEfRK.png*">
+            <input type="submit" value="Submit">
+          </form>
+          <form action="/api/close_reimbursement" method="post">
+            <p><code>POST /api/close_reimbursement</code></p>
+            <input id="closename" type="text" name="name" placeholder="Chipotle*">
+            <input id="closeamount" type="text" name="amount" placeholder="$42.42*">
+            <input type="submit" value="Submit">
+          </form>
+          <p id = "total">
+              Total Outstanding: $0
+          </p>
+          <div id="uploaded">
+            <h3>
+              Uploaded Reimbursements
+            </h3>
+          </div>
+          <div id="submitted">
+            <h3>
+              Submitted Reimbursements
+            </h3>
+          </div>
+          <div id="closed">
+            <h3>
+              Closed Reimbursements
+            </h3>
+          </div>
+      <script>
+
+        var submitted;
+        var uploaded;
+        var close;
+        var sum = 0;
+
+        var HttpClient = function() {
+            this.get = function(aUrl, aCallback) {
+                var anHttpRequest = new XMLHttpRequest();
+                anHttpRequest.onreadystatechange = function() {
+                    if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                        aCallback(anHttpRequest.responseText);
+                }
+
+                anHttpRequest.open( "GET", aUrl, true );
+                anHttpRequest.send( null );
+            }
+        }
+
+        function makeUL(array) {
+            // Create the list element:
+            var list = document.createElement('ul');
+
+            if(array.length == 0) {
+              var item = document.createElement("li");
+
+              var disp = "None";
+              item.appendChild(document.createTextNode(disp));
+              list.appendChild(item);
+            }
+
+            for (var i = 0; i < array.length; i++) {
+                // Create the list item:
+                var item = document.createElement('li');
+
+                // Set its contents:
+                var rei = array[i];
+                var disp = rei.name + ": $" + rei.amount;
+                if(rei.status != "closed") {
+                  sum += rei.amount;
+                }
+                item.appendChild(document.createTextNode(disp));
+
+                document.getElementById("total").innerHTML = "Total Outstanding: $" + sum.toFixed(2);
+
+                // Add it to the list:
+                list.appendChild(item);
+            }
+
+            // Finally, return the constructed list:
+            return list;
+        }
+      var client = new HttpClient();
+        client.get('https://hushed-stream.glitch.me/api/uploaded_reimbursements', function(response) {
+            uploaded = JSON.parse(response);
+            document.getElementById('uploaded').appendChild(makeUL(uploaded));
+        });
+        client.get('https://hushed-stream.glitch.me/api/submitted_reimbursements', function(response) {
+            submitted = JSON.parse(response);
+            document.getElementById('submitted').appendChild(makeUL(submitted));
+        });
+        client.get('https://hushed-stream.glitch.me/api/closed_reimbursements', function(response) {
+            close = JSON.parse(response);
+            document.getElementById('closed').appendChild(makeUL(close));
+        });
+
+      </script>
+    </main>
+
+  </body>
+</html>
