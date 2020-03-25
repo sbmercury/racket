@@ -46,7 +46,7 @@ var rule3 = new schedule.RecurrenceRule();
 rule3.dayOfWeek = [2,4,6];
 rule3.hour = 6;
 rule3.minute = 0;
-schedule.scheduleJob(rule2, function() {
+schedule.scheduleJob(rule3, function() {
     sendReminderEmail();
 });
 
@@ -192,8 +192,8 @@ function sendEmail() {
       const sgMail = require('@sendgrid/mail');
         sgMail.setApiKey(process.env.SENDGRID);
         const msg = {
-          to: 'hikingmonk@gmail.com',
-          cc: 'spencerbartlett@vt.edu',
+          to: process.env.PAYER_EMAIL,
+          cc: process.env.PAID_EMAIL,
           from: 'racket@spencerbartlett.com',
           subject: 'Reimbursement Request for ' + (date.getMonth() + 1) + '/' + date.getDate(),
           text: text,
@@ -218,7 +218,7 @@ function sendReminderEmail() {
   const sgMail = require('@sendgrid/mail');
     sgMail.setApiKey(process.env.SENDGRID);
     const msg = {
-      to: 'spencerbartlett@vt.edu',
+      to: process.env.PAID_EMAIL,
       from: 'racket@spencerbartlett.com',
       subject: 'Reimbursement Close-Check Reminder ' + (date.getMonth() + 1) + '/' + date.getDate(),
       text: text,
