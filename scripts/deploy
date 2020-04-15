@@ -9,6 +9,8 @@ ssh root@167.99.148.54 <<EOF
   git pull
  
   npm install --production
+  
+  pm2 flush
  
   pm2 restart racket
  
