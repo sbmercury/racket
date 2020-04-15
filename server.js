@@ -201,8 +201,7 @@ function sendEmail() {
         };
         sgMail.send(msg);
         return "Sent";
-    })
-
+    });
 }
 
 function sendReminderEmail() {
