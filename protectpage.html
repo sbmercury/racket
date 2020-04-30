@@ -109,15 +109,15 @@
             return list;
         }
       var client = new HttpClient();
-        client.get('https://hushed-stream.glitch.me/api/uploaded_reimbursements', function(response) {
+        client.get('https://racket.spencerbartlett.com/api/uploaded_reimbursements', function(response) {
             uploaded = JSON.parse(response);
             document.getElementById('uploaded').appendChild(makeUL(uploaded));
         });
-        client.get('https://hushed-stream.glitch.me/api/submitted_reimbursements', function(response) {
+        client.get('https://racket.spencerbartlett.com/api/submitted_reimbursements', function(response) {
             submitted = JSON.parse(response);
             document.getElementById('submitted').appendChild(makeUL(submitted));
         });
-        client.get('https://hushed-stream.glitch.me/api/closed_reimbursements', function(response) {
+        client.get('https://racket.spencerbartlett.com/api/closed_reimbursements', function(response) {
             close = JSON.parse(response);
             document.getElementById('closed').appendChild(makeUL(close));
         });
