@@ -186,7 +186,13 @@ function sendEmail() {
         if(count == 0) {
           text += "None \n";
         }
-      text += "\n Total Outstanding: $" + total;
+        if(total > 0) {
+            text += "\n Total Outstanding: $" + total.toFixed(2);
+        }
+        else {
+            text += "\n Total Outstanding: -$" + Math.abs(total).toFixed(2);
+        }
+
       console.log(text);
       var html = text.replace(/\n/g, "<br>");
       const sgMail = require('@sendgrid/mail');

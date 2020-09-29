@@ -99,7 +99,12 @@
                 }
                 item.appendChild(document.createTextNode(disp));
 
-                document.getElementById("total").innerHTML = "Total Outstanding: $" + sum.toFixed(2);
+                if(sum > 0) {
+                    document.getElementById("total").innerHTML = "Total Outstanding: $" + sum.toFixed(2);
+                }
+                else {
+                    document.getElementById("total").innerHTML = "Total Outstanding: -$" + Math.abs(sum).toFixed(2);
+                }
 
                 // Add it to the list:
                 list.appendChild(item);
