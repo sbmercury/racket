@@ -186,7 +186,7 @@ function sendEmail() {
         if(count == 0) {
           text += "None \n";
         }
-        if(total > 0) {
+        if(total >= 0) {
             text += "\n Total Outstanding: $" + total.toFixed(2);
         }
         else {

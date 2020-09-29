@@ -94,7 +94,7 @@
                 // Set its contents:
                 var rei = array[i];
                 var disp;
-                if(rei.amount > 0) {
+                if(rei.amount >= 0) {
                     disp = rei.name + ": $" + rei.amount;
                 }
                 else {
@@ -106,7 +106,7 @@
                 }
                 item.appendChild(document.createTextNode(disp));
 
-                if(sum > 0) {
+                if(sum >= 0) {
                     document.getElementById("total").innerHTML = "Total Outstanding: $" + sum.toFixed(2);
                 }
                 else {
