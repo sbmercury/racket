@@ -93,7 +93,14 @@
 
                 // Set its contents:
                 var rei = array[i];
-                var disp = rei.name + ": $" + rei.amount;
+                var disp;
+                if(rei.amount > 0) {
+                    disp = rei.name + ": $" + rei.amount;
+                }
+                else {
+                    disp = rei.name + ": -$" + Math.abs(rei.amount);
+                }
+
                 if(rei.status != "closed") {
                   sum += rei.amount;
                 }
