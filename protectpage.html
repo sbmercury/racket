@@ -25,14 +25,12 @@
       <p>Submit a New Reimbursement</p>
 
           <form action="/api/new_reimbursement" method="post">
-            <p><code>POST /api/new_reimbursement</code></p>
             <input id="name" type="text" name="name" placeholder="Chipotle*">
             <input id="amount" type="text" name="amount" placeholder="$42.42*">
             <input id="receipt" type="text" name="receipt" placeholder="https://i.imgur.com/E8AEfRK.png*">
             <input type="submit" value="Submit">
           </form>
           <form action="/api/close_reimbursement" method="post">
-            <p><code>POST /api/close_reimbursement</code></p>
             <input id="closename" type="text" name="name" placeholder="Chipotle*">
             <input id="closeamount" type="text" name="amount" placeholder="$42.42*">
             <input type="submit" value="Submit">

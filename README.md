@@ -1,17 +1,42 @@
-This is a simple project designed to track transactions. I needed a way to track transactions that my parents would reimburse me for and remind them about those transactions, this app allows me to quickly add and remove transactions and automatically sends reminder emails to both me and them.
+# Racket
 
----
+Racket is a simple reimbursement tracking system, originally designed to help me keep track
+of things that my parents owed me money for.
 
-This app uses:
+![Demo Screen showing Racket](https://i.imgur.com/8AaqoRP.png)
 
--NodeJS/Express
+## Features
 
--MongoDB (for storing transactions)
+- Upload reimbursements with names, amounts and links to a receipt
 
--SendGrid (for sending reminder emails)
 
--Node Schedule (for running recurring tasks)
+- Automatically send emails (default 3 times a week) to the person
+paying with info on what's new and what's been previously requested
+  
 
----
+- Automatically sends person being paid reminder emails to check if they've
+been paid and very easy closing if they have been
 
-My personal version uses Jenkins to automatically deploy changes to a DigitalOcean VPS that it's hosted on.
+
+## Installation
+
+#### Linux
+
+- Install packages
+
+`npm install`
+
+- Set environment variables
+
+`process.env.PORT: sets what port the app will run on (default 8073)`  
+`process.env.PAID_EMAIL: email address for the person getting paid (requesting reimbursements)`  
+`process.env.PAID_EMAIL: email address to the person paying`  
+`process.env.SENDGRID: sendgrid API key (used to send emails)`  
+`process.env.DATABASE: a mongoDB connection URL, used to store reimbursement info`
+
+
+- Start the app
+
+`node app.js`
+
+
