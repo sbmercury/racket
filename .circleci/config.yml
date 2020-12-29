@@ -1,0 +1,22 @@
+version: 2.1
+orbs:
+  node: circleci/node@4.1.0
+jobs:
+  deploy:
+    docker:
+      - image: cimg/node:13.11.0
+    steps:
+      - checkout
+      - run:
+          name: Setting command file permissions
+          command:  chmod +x ./scripts/deploy
+      - run:
+          name: Running VPS deploy script
+          command:  npm run deploy
+workflows:
+  node-tests:
+    jobs:
+      - node/test
+      - deploy:
+          requires:
+            - node/test
