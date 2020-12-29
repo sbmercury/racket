@@ -1,4 +1,4 @@
-# Racket
+# Racket ![<CircleCI>](https://circleci.com/gh/sbmercury/racket.svg?style=shield)
 
 Racket is a simple reimbursement tracking system, originally designed to help me keep track
 of things that my parents owed me money for.
