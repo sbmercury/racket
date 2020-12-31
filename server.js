@@ -37,7 +37,7 @@ var reimSchema = new Schema({
 
 var Reim = mongoose.model("Reim", reimSchema);
 
-//Creates and sets recurrce rule for sending request emails
+//Creates and sets recurrence rule for sending request emails
 var rule2 = new schedule.RecurrenceRule();
 rule2.dayOfWeek = [1,3,5]; //Mon, Wen, Fri
 rule2.hour = 6;
